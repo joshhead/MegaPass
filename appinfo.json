@@ -1,0 +1,9 @@
+{
+	"id": "com.mystuff.megapass",
+	"version": "1.0.0",
+	"vendor": "AnScoob",
+	"type": "web",
+	"main": "index.html",
+	"title": "Mega Pass",
+	"icon": "icon.png"
+}
