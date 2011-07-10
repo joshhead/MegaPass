@@ -35,7 +35,13 @@ ShakerAssistant.prototype.setup = function() {
     {label: "Clear All Checks", command: 'do-clearChecks'}
     ]
             }); 
-
+    var cookie = new Mojo.Model.Cookie("checks");
+    var checks = cookie.get();
+    if (checks.hasOwnProperty("box1")) {
+        for (var i = 1; i <= 25; i++) {
+            document.getElementById('box' + i).checked = checks['box' + i];
+        }
+    }
 };
 
 StageAssistant.prototype.handleCommand = function(event) {
@@ -46,6 +52,8 @@ StageAssistant.prototype.handleCommand = function(event) {
                 for (var i = 1; i <= 25; i++) {
                     document.getElementById('box' + i).checked = false;
                 }
+                var cookie = new Mojo.Model.Cookie("checks");
+                cookie.remove();
                 break;
         }
     }
@@ -64,6 +72,12 @@ ShakerAssistant.prototype.deactivate = function(event) {
 ShakerAssistant.prototype.cleanup = function(event) {
 	/* this function should do any cleanup needed before the scene is destroyed as 
 	   a result of being popped off the scene stack */
+    var cookie = new Mojo.Model.Cookie("checks");
+    var checks = {};
+    for (var i = 1; i <= 25; i++) {
+        checks['box' + i] = document.getElementById('box' + i).checked;
+    }
+    cookie.put(checks);
 };
 
 
